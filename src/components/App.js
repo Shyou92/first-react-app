@@ -2,28 +2,29 @@ import React from "react";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
+import PopupWithForm from "./PopupWithForm";
+import ImagePopup from "./ImagePopup";
 
 function App() {
+  const [openEditAvatarPopup, setOpenEditAvatarPopup] = React.useState(false);
+  const [openEditProfilePopup, setOpenEditProfilePopup] = React.useState(false);
+  const [openAddPlacePopup, setOpenAddPlacePopup] = React.useState(false);
+  const [openConfirmPopup, setOpenConfirmPopup] = React.useState(false);
+
   const handleEditAvatarClick = () => {
-    document.querySelector(".profile__edit").addEventListener("click", () => {
-      document.querySelector("#js-update").classList.add("popup_is-opened");
-    });
+    setOpenEditAvatarPopup(true);
   };
 
   const handleEditProfileClick = () => {
-    document
-      .querySelector(".profile__info-edit")
-      .addEventListener("click", () => {
-        document.querySelector("#js-edit").classList.add("popup_is-opened");
-      });
+    setOpenEditProfilePopup(true);
   };
 
   const handleAddPlaceClick = () => {
-    document
-      .querySelector(".profile__add-button")
-      .addEventListener("click", () => {
-        document.querySelector("#js-create").classList.add("popup_is-opened");
-      });
+    setOpenAddPlacePopup(true);
+  };
+
+  const handleConfirmPopup = () => {
+    setOpenConfirmPopup(true);
   };
 
   return (
@@ -34,8 +35,120 @@ function App() {
           handleEditAvatarClick={handleEditAvatarClick}
           handleEditProfileClick={handleEditProfileClick}
           handleAddPlaceClick={handleAddPlaceClick}
+          handleConfirmPopup={handleConfirmPopup}
         />
         <Footer />
+        <PopupWithForm
+          title="Обновить аватар"
+          name="editAvatar"
+          isOpened={openEditAvatarPopup}
+          buttonTextContent="Сохранить"
+          children={
+            <section className="popup__form-section">
+              <input
+                type="url"
+                required
+                className="popup__input popup__input-update"
+                id="edit-ava-popup"
+                name="update"
+                placeholder="Обновимся?"
+              />
+              <span
+                className="popup__input_error"
+                id="edit-ava-popup-error"
+              ></span>
+            </section>
+          }
+        />
+        <PopupWithForm
+          title="Редактировать профиль"
+          name="editProfile"
+          isOpened={openEditProfilePopup}
+          buttonTextContent="Сохранить"
+          children={
+            <>
+              <section className="popup__form-section">
+                <input
+                  type="text"
+                  required
+                  className="popup__input popup__input_name"
+                  id="edit-name-popup"
+                  minLength="2"
+                  maxLength="40"
+                  name="name"
+                  placeholder="Имя"
+                />
+                <span
+                  className="popup__input_error"
+                  id="edit-name-popup-error"
+                ></span>
+              </section>
+              <section className="popup__form-section">
+                <input
+                  type="text"
+                  required
+                  className="popup__input popup__input_job"
+                  id="edit-job-popup"
+                  minLength="2"
+                  maxLength="200"
+                  name="about"
+                  placeholder="Профессия"
+                />
+                <span
+                  className="popup__input_error"
+                  id="edit-job-popup-error"
+                ></span>
+              </section>
+            </>
+          }
+        />
+        <PopupWithForm
+          title="Новое место"
+          name="addNewPlace"
+          isOpened={openAddPlacePopup}
+          buttonTextContent="Добавить"
+          children={
+            <>
+              <section className="popup__form-section">
+                <input
+                  type="text"
+                  required
+                  className="popup__input popup__input_title"
+                  id="create-title-popup"
+                  minLength="2"
+                  maxLength="30"
+                  name="name"
+                  placeholder="Название"
+                />
+                <span
+                  className="popup__input_error"
+                  id="create-title-popup-error"
+                ></span>
+              </section>
+              <section className="popup__form-section">
+                <input
+                  type="url"
+                  required
+                  className="popup__input popup__input_link"
+                  id="create-link-popup"
+                  name="link"
+                  placeholder="Ссылка на картинку"
+                />
+                <span
+                  className="popup__input_error"
+                  id="create-link-popup-error"
+                ></span>
+              </section>
+            </>
+          }
+        />
+        <PopupWithForm
+          title="Вы уверены?"
+          name="popupConfirm"
+          isOpened={openConfirmPopup}
+          buttonTextContent="Да"
+        />
+        <ImagePopup />
 
         <div className="popup" id="js-edit">
           <div className="popup__container popup__container_content_text">
