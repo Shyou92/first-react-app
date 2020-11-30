@@ -6,25 +6,30 @@ import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 
 function App() {
-  const [openEditAvatarPopup, setOpenEditAvatarPopup] = React.useState(false);
-  const [openEditProfilePopup, setOpenEditProfilePopup] = React.useState(false);
-  const [openAddPlacePopup, setOpenAddPlacePopup] = React.useState(false);
-  const [openConfirmPopup, setOpenConfirmPopup] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(
+    false
+  );
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(
+    false
+  );
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
 
-  const handleEditAvatarClick = () => {
-    setOpenEditAvatarPopup(true);
+  const onEditAvatar = () => {
+    setIsEditAvatarPopupOpen(true);
   };
 
-  const handleEditProfileClick = () => {
-    setOpenEditProfilePopup(true);
+  const onEditProfile = () => {
+    setIsEditProfilePopupOpen(true);
   };
 
-  const handleAddPlaceClick = () => {
-    setOpenAddPlacePopup(true);
+  const onAddPlace = () => {
+    setIsAddPlacePopupOpen(true);
   };
 
-  const handleConfirmPopup = () => {
-    setOpenConfirmPopup(true);
+  const closeAllPopups = () => {
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
   };
 
   return (
@@ -32,16 +37,16 @@ function App() {
       <div className="page">
         <Header />
         <Main
-          handleEditAvatarClick={handleEditAvatarClick}
-          handleEditProfileClick={handleEditProfileClick}
-          handleAddPlaceClick={handleAddPlaceClick}
-          handleConfirmPopup={handleConfirmPopup}
+          onEditAvatar={onEditAvatar}
+          onEditProfile={onEditProfile}
+          onAddPlace={onAddPlace}
         />
         <Footer />
         <PopupWithForm
           title="Обновить аватар"
           name="editAvatar"
-          isOpened={openEditAvatarPopup}
+          modificator="content_text popup__container_update"
+          isOpened={isEditAvatarPopupOpen}
           buttonTextContent="Сохранить"
           children={
             <section className="popup__form-section">
@@ -59,11 +64,13 @@ function App() {
               ></span>
             </section>
           }
+          onClose={closeAllPopups}
         />
         <PopupWithForm
           title="Редактировать профиль"
           name="editProfile"
-          isOpened={openEditProfilePopup}
+          modificator="content_text"
+          isOpened={isEditProfilePopupOpen}
           buttonTextContent="Сохранить"
           children={
             <>
@@ -101,11 +108,13 @@ function App() {
               </section>
             </>
           }
+          onClose={closeAllPopups}
         />
         <PopupWithForm
           title="Новое место"
           name="addNewPlace"
-          isOpened={openAddPlacePopup}
+          modificator="content_text"
+          isOpened={isAddPlacePopupOpen}
           buttonTextContent="Добавить"
           children={
             <>
@@ -141,12 +150,7 @@ function App() {
               </section>
             </>
           }
-        />
-        <PopupWithForm
-          title="Вы уверены?"
-          name="popupConfirm"
-          isOpened={openConfirmPopup}
-          buttonTextContent="Да"
+          onClose={closeAllPopups}
         />
         <ImagePopup />
 
