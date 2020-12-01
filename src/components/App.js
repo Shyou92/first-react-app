@@ -45,7 +45,7 @@ function App() {
         <PopupWithForm
           title="Обновить аватар"
           name="editAvatar"
-          modificator="content_text popup__container_update"
+          modifier="content_text popup__container_update"
           isOpened={isEditAvatarPopupOpen}
           buttonTextContent="Сохранить"
           children={
@@ -69,7 +69,7 @@ function App() {
         <PopupWithForm
           title="Редактировать профиль"
           name="editProfile"
-          modificator="content_text"
+          modifier="content_text"
           isOpened={isEditProfilePopupOpen}
           buttonTextContent="Сохранить"
           children={
@@ -113,7 +113,7 @@ function App() {
         <PopupWithForm
           title="Новое место"
           name="addNewPlace"
-          modificator="content_text"
+          modifier="content_text"
           isOpened={isAddPlacePopupOpen}
           buttonTextContent="Добавить"
           children={

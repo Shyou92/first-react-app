@@ -1,7 +1,7 @@
 function PopupWithForm({
   title,
   name,
-  modificator,
+  modifier,
   isOpened,
   buttonTextContent,
   children,
@@ -14,7 +14,7 @@ function PopupWithForm({
       } `}
       id="js-edit"
     >
-      <div className={`popup__container popup__container_${modificator}`}>
+      <div className={`popup__container popup__container_${modifier}`}>
         <button
           className="popup__close"
           type="button"
