@@ -1,11 +1,13 @@
 import React from "react";
 import { useEffect } from "react";
 import api from "../utils/api";
+import Cards from "../components/Cards";
 
 function Main({ onEditAvatar, onEditProfile, onAddPlace }) {
   const [userName, setUserName] = React.useState("");
   const [userDescription, setUserDescription] = React.useState("");
   const [userAvatar, setUserAvatar] = React.useState("");
+  const [cards, setCards] = React.useState([]);
   // try on API
   useEffect(() => {
     api
@@ -16,7 +18,26 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace }) {
         setUserAvatar(response.avatar);
       })
       .catch((error) => console.log(error));
-  });
+
+    api
+      .getCards()
+      .then((data) => {
+        console.log(data);
+        const cards = data.map((item) => {
+          return {
+            id: item._id,
+            src: item.link,
+            title: item.name,
+            likes: item.likes,
+            alt: item.name,
+          };
+        });
+
+        setCards(cards);
+        console.log(cards.id, cards.src);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   return (
     <main className="content">
@@ -40,7 +61,11 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace }) {
         <button className="profile__add-button" onClick={onAddPlace}></button>
       </section>
 
-      <section className="elements"></section>
+      <section className="elements">
+        {cards.map(({ id, ...props }) => {
+          return <Cards key={id} {...props} />;
+        })}
+      </section>
     </main>
   );
 }
