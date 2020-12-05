@@ -1,3 +1,7 @@
+0. My very first React application. It provides:
+   a) Getting user information by API;
+   b) Opening different type of popups;
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
