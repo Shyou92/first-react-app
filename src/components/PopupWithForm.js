@@ -12,7 +12,6 @@ function PopupWithForm({
       className={`popup popup_type_${name} ${
         isOpened ? "popup_is-opened" : ""
       } `}
-      id="js-edit"
     >
       <div className={`popup__container popup__container_${modifier}`}>
         <button

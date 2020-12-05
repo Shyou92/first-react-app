@@ -1,9 +1,9 @@
 import React from "react";
 import { useEffect } from "react";
 import api from "../utils/api";
-import Cards from "../components/Cards";
+import Card from "./Card";
 
-function Main({ onEditAvatar, onEditProfile, onAddPlace }) {
+function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
   const [userName, setUserName] = React.useState("");
   const [userDescription, setUserDescription] = React.useState("");
   const [userAvatar, setUserAvatar] = React.useState("");
@@ -22,7 +22,6 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace }) {
     api
       .getCards()
       .then((data) => {
-        console.log(data);
         const cards = data.map((item) => {
           return {
             id: item._id,
@@ -32,9 +31,7 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace }) {
             alt: item.name,
           };
         });
-
         setCards(cards);
-        console.log(cards.id, cards.src);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -62,8 +59,8 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace }) {
       </section>
 
       <section className="elements">
-        {cards.map(({ id, ...props }) => {
-          return <Cards key={id} {...props} />;
+        {cards.map((item, id) => {
+          return <Card key={id} card={item} onCardClick={onCardClick} />;
         })}
       </section>
     </main>
