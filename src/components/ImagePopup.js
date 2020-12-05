@@ -1,5 +1,4 @@
 function ImagePopup(card) {
-  console.log(card);
   return (
     <div className={`popup popup_type_${card.name} ${card.isOpened}`}>
       <div className="popup__container popup__container_content_image">

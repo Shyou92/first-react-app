@@ -15,7 +15,9 @@ class Api {
       if (res.ok) {
         return res.json();
       } else {
-        return Promise.reject(`Error ${res.status} - ${res.statusText}`);
+        return Promise.reject(
+          new Error(`Ошибка ${res.status} - ${res.statusText}`)
+        );
       }
     });
   }
@@ -30,7 +32,9 @@ class Api {
       if (res.ok) {
         return res.json();
       } else {
-        return Promise.reject(`Error ${res.status} - ${res.statusText}`);
+        return Promise.reject(
+          new Error(`Ошибка ${res.status} - ${res.statusText}`)
+        );
       }
     });
   }
@@ -50,7 +54,9 @@ class Api {
       if (res.ok) {
         return res.json();
       } else {
-        return Promise.reject(`Error ${res.status} - ${res.statusText}`);
+        return Promise.reject(
+          new Error(`Ошибка ${res.status} - ${res.statusText}`)
+        );
       }
     });
   }
@@ -70,7 +76,9 @@ class Api {
       if (res.ok) {
         return res.json();
       } else {
-        return Promise.reject(`Error ${res.status} - ${res.statusText}`);
+        return Promise.reject(
+          new Error(`Ошибка ${res.status} - ${res.statusText}`)
+        );
       }
     });
   }
@@ -88,7 +96,9 @@ class Api {
       if (res.ok) {
         return res.json();
       } else {
-        return Promise.reject(`Error ${res.status} - ${res.statusText}`);
+        return Promise.reject(
+          new Error(`Ошибка ${res.status} - ${res.statusText}`)
+        );
       }
     });
   }
@@ -107,7 +117,9 @@ class Api {
       if (res.ok) {
         return res.json();
       } else {
-        return Promise.reject(`Error ${res.status} - ${res.statusText}`);
+        return Promise.reject(
+          new Error(`Ошибка ${res.status} - ${res.statusText}`)
+        );
       }
     });
   }
@@ -123,7 +135,9 @@ class Api {
       if (res.ok) {
         return res.json();
       } else {
-        return Promise.reject(`Error ${res.status} - ${res.statusText}`);
+        return Promise.reject(
+          new Error(`Ошибка ${res.status} - ${res.statusText}`)
+        );
       }
     });
   }

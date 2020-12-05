@@ -13,6 +13,7 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
     api
       .getUserInfo()
       .then((response) => {
+        console.log(response);
         setUserName(response.name);
         setUserDescription(response.about);
         setUserAvatar(response.avatar);
@@ -22,6 +23,7 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
     api
       .getCards()
       .then((data) => {
+        console.log(data);
         const cards = data.map((item) => {
           return {
             id: item._id,
