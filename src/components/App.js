@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
+import api from "../utils/api";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(
@@ -14,6 +15,7 @@ function App() {
   );
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
+  const [currentUser, setCurrentUser] = React.useState();
 
   const onEditAvatar = () => {
     setIsEditAvatarPopupOpen(true);
@@ -37,6 +39,14 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setSelectedCard(null);
   };
+
+  const handleCurrentUser = (data) => {
+    setCurrentUser(data);
+  };
+
+  useEffect(() => {
+    api.getUserInfo().then((res) => handleCurrentUser(res));
+  });
 
   return (
     <div className="App">
