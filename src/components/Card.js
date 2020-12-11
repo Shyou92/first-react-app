@@ -6,14 +6,14 @@ function Card(item) {
   return (
     <div className="element">
       <img
-        src={item.card.src}
-        alt={item.card.alt}
+        src={item.card.link}
+        alt={item.card.name}
         className="element__photo"
         onClick={handleClick}
       />
       <button className="element__delete"></button>
       <div className="element__container">
-        <h2 className="element__heading">{item.card.title}</h2>
+        <h2 className="element__heading">{item.card.name}</h2>
         <div className="element__like-container">
           <button className="element__like" type="button"></button>
           <span className="element__like-counter">

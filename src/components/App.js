@@ -160,8 +160,7 @@ function App() {
           onClose={closeAllPopups}
         />
         <ImagePopup
-          card={selectedCard || ""}
-          name="image"
+          card={selectedCard || {}}
           isOpened={selectedCard && "popup_is-opened"}
           onCardClick={handleCardClick}
           onClose={closeAllPopups}

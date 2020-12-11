@@ -5,6 +5,16 @@ class Api {
     this.token = token;
   }
 
+  _getResponseData(res) {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return Promise.reject(
+        new Error(`Ошибка ${res.status} - ${res.statusText}`)
+      );
+    }
+  }
+
   getUserInfo() {
     return fetch(`${this.baseUrl}v1/${this.group}/users/me`, {
       headers: {
@@ -12,13 +22,7 @@ class Api {
         "Content-Type": "application/json",
       },
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(
-          new Error(`Ошибка ${res.status} - ${res.statusText}`)
-        );
-      }
+      return this._getResponseData(res);
     });
   }
 
@@ -29,13 +33,7 @@ class Api {
         "Content-Type": "application/json",
       },
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(
-          new Error(`Ошибка ${res.status} - ${res.statusText}`)
-        );
-      }
+      return this._getResponseData(res);
     });
   }
 
@@ -51,13 +49,7 @@ class Api {
         about: data.about,
       }),
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(
-          new Error(`Ошибка ${res.status} - ${res.statusText}`)
-        );
-      }
+      return this._getResponseData(res);
     });
   }
 
@@ -73,13 +65,7 @@ class Api {
         link,
       }),
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(
-          new Error(`Ошибка ${res.status} - ${res.statusText}`)
-        );
-      }
+      return this._getResponseData(res);
     });
   }
 
@@ -93,13 +79,7 @@ class Api {
         "Content-Type": "application/json",
       },
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(
-          new Error(`Ошибка ${res.status} - ${res.statusText}`)
-        );
-      }
+      return this._getResponseData(res);
     });
   }
 
@@ -114,13 +94,7 @@ class Api {
         avatar: data,
       }),
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(
-          new Error(`Ошибка ${res.status} - ${res.statusText}`)
-        );
-      }
+      return this._getResponseData(res);
     });
   }
 
@@ -132,13 +106,7 @@ class Api {
         "Content-Type": "application/json",
       },
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(
-          new Error(`Ошибка ${res.status} - ${res.statusText}`)
-        );
-      }
+      return this._getResponseData(res);
     });
   }
 }
