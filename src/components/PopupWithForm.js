@@ -6,6 +6,7 @@ function PopupWithForm({
   buttonTextContent,
   children,
   onClose,
+  onSubmit,
 }) {
   return (
     <div
@@ -20,7 +21,12 @@ function PopupWithForm({
           onClick={onClose}
         ></button>
         <h3 className="popup__title">{title}</h3>
-        <form className="popup__form" name={name} noValidate>
+        <form
+          className="popup__form"
+          name={name}
+          onSubmit={onSubmit}
+          noValidate
+        >
           {children}
           <button className="popup__submit" type="submit">
             {buttonTextContent}

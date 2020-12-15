@@ -4,6 +4,7 @@ import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
+import EditProfilePopup from "./EditProfilePopup";
 import api from "../utils/api";
 import { CurrentUserContext } from "../contexts/currentUserContext";
 
@@ -64,6 +65,15 @@ function App() {
     });
   };
 
+  const handleUpdateUser = (data) => {
+    api
+      .setUserInfo(data)
+      .then((newUserInfo) => {
+        setCurrentUser(newUserInfo);
+      })
+      .finally(() => setIsEditProfilePopupOpen(false));
+  };
+
   useEffect(() => {
     Promise.all([api.getUserInfo(), api.getCards()])
       .then(([res, data]) => {
@@ -112,49 +122,10 @@ function App() {
             }
             onClose={closeAllPopups}
           />
-          <PopupWithForm
-            title="Редактировать профиль"
-            name="editProfile"
-            modifier="content_text"
+          <EditProfilePopup
             isOpened={isEditProfilePopupOpen}
-            buttonTextContent="Сохранить"
-            children={
-              <>
-                <section className="popup__form-section">
-                  <input
-                    type="text"
-                    required
-                    className="popup__input popup__input_name"
-                    id="edit-name-popup"
-                    minLength="2"
-                    maxLength="40"
-                    name="name"
-                    placeholder="Имя"
-                  />
-                  <span
-                    className="popup__input_error"
-                    id="edit-name-popup-error"
-                  ></span>
-                </section>
-                <section className="popup__form-section">
-                  <input
-                    type="text"
-                    required
-                    className="popup__input popup__input_job"
-                    id="edit-job-popup"
-                    minLength="2"
-                    maxLength="200"
-                    name="about"
-                    placeholder="Профессия"
-                  />
-                  <span
-                    className="popup__input_error"
-                    id="edit-job-popup-error"
-                  ></span>
-                </section>
-              </>
-            }
             onClose={closeAllPopups}
+            onUpdateUser={handleUpdateUser}
           />
           <PopupWithForm
             title="Новое место"
