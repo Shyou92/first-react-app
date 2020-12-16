@@ -1,6 +1,11 @@
 0. My very first React application. It provides:
    a) Getting user information by API;
    b) Opening different type of popups;
+   UPD:
+   c) Added change of user information;
+   d) Release of adding card;
+   e) Editing of avatar;
+   f) Likes and deleting cards;
 
 # Getting Started with Create React App
 
