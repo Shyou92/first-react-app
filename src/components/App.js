@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
-import PopupWithForm from "./PopupWithForm";
+import AddPlacePopup from "./AddPlacePopup";
 import ImagePopup from "./ImagePopup";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
@@ -80,6 +80,13 @@ function App() {
       .finally(() => setIsEditAvatarPopupOpen(false));
   };
 
+  const handleAddPlaceSubmit = (data, link) => {
+    api
+      .addCard(data, link)
+      .then((res) => setCards([res, ...cards]))
+      .finally(() => setIsAddPlacePopupOpen(false));
+  };
+
   useEffect(() => {
     Promise.all([api.getUserInfo(), api.getCards()])
       .then(([res, data]) => {
@@ -114,47 +121,10 @@ function App() {
             onClose={closeAllPopups}
             onUpdateUser={handleUpdateUser}
           />
-          <PopupWithForm
-            title="Новое место"
-            name="addNewPlace"
-            modifier="content_text"
+          <AddPlacePopup
             isOpened={isAddPlacePopupOpen}
-            buttonTextContent="Добавить"
-            children={
-              <>
-                <section className="popup__form-section">
-                  <input
-                    type="text"
-                    required
-                    className="popup__input popup__input_title"
-                    id="create-title-popup"
-                    minLength="2"
-                    maxLength="30"
-                    name="name"
-                    placeholder="Название"
-                  />
-                  <span
-                    className="popup__input_error"
-                    id="create-title-popup-error"
-                  ></span>
-                </section>
-                <section className="popup__form-section">
-                  <input
-                    type="url"
-                    required
-                    className="popup__input popup__input_link"
-                    id="create-link-popup"
-                    name="link"
-                    placeholder="Ссылка на картинку"
-                  />
-                  <span
-                    className="popup__input_error"
-                    id="create-link-popup-error"
-                  ></span>
-                </section>
-              </>
-            }
             onClose={closeAllPopups}
+            onAddPlace={handleAddPlaceSubmit}
           />
           <ImagePopup
             card={selectedCard || {}}
