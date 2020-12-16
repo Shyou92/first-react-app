@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
 import api from "../utils/api";
 import { CurrentUserContext } from "../contexts/currentUserContext";
 
@@ -17,7 +18,7 @@ function App() {
   );
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
-  const [currentUser, setCurrentUser] = React.useState("");
+  const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
 
   const onEditAvatar = () => {
@@ -58,10 +59,8 @@ function App() {
 
   const handleCardDelete = (card) => {
     api.deleteCard(card._id).then((deletedCard) => {
-      const renewedCards = cards.filter((c) =>
-        c._id === card._id ? deletedCard : c
-      );
-      setCards(renewedCards);
+      const rerenderInitialCards = cards.filter((c) => c._id !== card._id);
+      setCards(rerenderInitialCards);
     });
   };
 
@@ -72,6 +71,13 @@ function App() {
         setCurrentUser(newUserInfo);
       })
       .finally(() => setIsEditProfilePopupOpen(false));
+  };
+
+  const handleUpdateAvatar = (data) => {
+    api
+      .setAvatar(data)
+      .then((res) => setCurrentUser(res))
+      .finally(() => setIsEditAvatarPopupOpen(false));
   };
 
   useEffect(() => {
@@ -98,29 +104,10 @@ function App() {
             onCardDelete={handleCardDelete}
           />
           <Footer />
-          <PopupWithForm
-            title="Обновить аватар"
-            name="editAvatar"
-            modifier="content_text popup__container_update"
+          <EditAvatarPopup
             isOpened={isEditAvatarPopupOpen}
-            buttonTextContent="Сохранить"
-            children={
-              <section className="popup__form-section">
-                <input
-                  type="url"
-                  required
-                  className="popup__input popup__input-update"
-                  id="edit-ava-popup"
-                  name="update"
-                  placeholder="Обновимся?"
-                />
-                <span
-                  className="popup__input_error"
-                  id="edit-ava-popup-error"
-                ></span>
-              </section>
-            }
             onClose={closeAllPopups}
+            onUpdateAvatar={handleUpdateAvatar}
           />
           <EditProfilePopup
             isOpened={isEditProfilePopupOpen}
