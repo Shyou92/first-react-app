@@ -1,3 +1,7 @@
+---
+permalink: /index.html
+---
+
 0. My very first React application. It provides:
    a) Getting user information by API;
    b) Opening different type of popups;
@@ -77,7 +81,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
----
-
-## permalink: /index.html
