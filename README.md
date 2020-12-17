@@ -1,7 +1,3 @@
----
-permalink: /index.html
----
-
 0. My very first React application. It provides:
    a) Getting user information by API;
    b) Opening different type of popups;
