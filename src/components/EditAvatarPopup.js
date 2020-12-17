@@ -17,23 +17,22 @@ function EditAvatarPopup({ isOpened, onClose, onUpdateAvatar }) {
       isOpened={isOpened}
       buttonTextContent="Сохранить"
       onSubmit={handleSubmit}
-      children={
-        <section className="popup__form-section">
-          <input
-            type="url"
-            ref={avatarRef}
-            required
-            className="popup__input popup__input-update"
-            id="edit-ava-popup"
-            name="update"
-            placeholder="Обновимся?"
-          />
-          <span className="popup__input_error" id="edit-ava-popup-error"></span>
-        </section>
-      }
       onClose={onClose}
       onHandleSubmit={handleSubmit}
-    />
+    >
+      <section className="popup__form-section">
+        <input
+          type="url"
+          ref={avatarRef}
+          required
+          className="popup__input popup__input-update"
+          id="edit-ava-popup"
+          name="update"
+          placeholder="Обновимся?"
+        />
+        <span className="popup__input_error" id="edit-ava-popup-error"></span>
+      </section>
+    </PopupWithForm>
   );
 }
 

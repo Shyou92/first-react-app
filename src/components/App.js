@@ -51,17 +51,23 @@ function App() {
   const handleLikeCard = (card) => {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
-    api.setLike(card._id, isLiked).then((newCard) => {
-      const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
-      setCards(newCards);
-    });
+    api
+      .setLike(card._id, isLiked)
+      .then((newCard) => {
+        const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
+        setCards(newCards);
+      })
+      .catch((error) => console.log(error));
   };
 
   const handleCardDelete = (card) => {
-    api.deleteCard(card._id).then((deletedCard) => {
-      const rerenderInitialCards = cards.filter((c) => c._id !== card._id);
-      setCards(rerenderInitialCards);
-    });
+    api
+      .deleteCard(card._id)
+      .then((deletedCard) => {
+        const rerenderInitialCards = cards.filter((c) => c._id !== card._id);
+        setCards(rerenderInitialCards);
+      })
+      .catch((error) => console.log(error));
   };
 
   const handleUpdateUser = (data) => {
@@ -69,22 +75,29 @@ function App() {
       .setUserInfo(data)
       .then((newUserInfo) => {
         setCurrentUser(newUserInfo);
+        setIsEditProfilePopupOpen(false);
       })
-      .finally(() => setIsEditProfilePopupOpen(false));
+      .catch((error) => console.log(error));
   };
 
   const handleUpdateAvatar = (data) => {
     api
       .setAvatar(data)
-      .then((res) => setCurrentUser(res))
-      .finally(() => setIsEditAvatarPopupOpen(false));
+      .then((res) => {
+        setCurrentUser(res);
+        setIsEditAvatarPopupOpen(false);
+      })
+      .catch((error) => console.log(error));
   };
 
   const handleAddPlaceSubmit = (data, link) => {
     api
       .addCard(data, link)
-      .then((res) => setCards([res, ...cards]))
-      .finally(() => setIsAddPlacePopupOpen(false));
+      .then((res) => {
+        setCards([res, ...cards]);
+        setIsAddPlacePopupOpen(false);
+      })
+      .catch((error) => console.log(error));
   };
 
   useEffect(() => {
